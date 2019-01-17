@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+# TODO: write comments for the whole script
+
+
+class Card:
+    import random
+    Deck = []
+    SuitsList = ["\u2660", "\u2661", "\u2662", "\u2663"]
+    GameSuit = ["S", "H", "D", "C"]
+
+    def __init__(self):
+        self.suit = ""
+        self.rank = ""
+
+    def frank(self):
+        if self.rank >= 11:
+            if self.rank == 11:
+                self.rank = "J"
+            elif self.rank == 12:
+                self.rank = "Q"
+            elif self.rank == 13:
+                self.rank = "K"
+            elif self.rank == 14:
+                self.rank = "A"
+        else:
+            return self.rank
+
+    def makedeck(self):
+        for suit in self.SuitsList:
+            suit = suit
+            for rank in range(2, 15):
+                somecard = Card()
+                somecard.rank = rank
+                somecard.frank()
+                self.Deck.append(str(somecard.rank) + suit)
+
+    def printdc(self, op="deck", cardnum=0):
+        if op == "deck":
+            for out in self.Deck[::4]:
+                print((out[:-1] + ' of ' + out[-1]).ljust(8, " ") + ' ' +
+                    (self.Deck[self.Deck.index(out) + 1][:-1] + ' of ' + self.Deck[self.Deck.index(out) + 1][-1]).ljust(8, " ") + ' ' +
+                    (self.Deck[self.Deck.index(out) + 2][:-1] + ' of ' + self.Deck[self.Deck.index(out) + 2][-1]).ljust(8, " ") + ' ' +
+                    (self.Deck[self.Deck.index(out) + 3][:-1] + ' of ' + self.Deck[self.Deck.index(out) + 3][-1]).ljust(8, " ") + ' ')
+        else:
+            print(self.Deck[cardnum][:-1] + " of " + self.Deck[cardnum][-1])
+
+    def shuffledeck(self, shuffletimes=1000):
+        for x in range(shuffletimes):
+            self.random.shuffle(self.Deck)
+
+    def isindeck(self, check):
+        try:
+            self.Deck.index(check[:-1] + Deck1.SuitsList[Deck1.GameSuit.index(check[-1:])])
+            return True
+        except ValueError:
+            return False
+
+
+import time
+
+
+Deck1 = Card()
+Deck1.makedeck()
+Deck1.printdc("card", 14)
+Deck1.printdc("card", 27)
+print("\n^^^Card^^^\nvvvDeckvvv\n")
+Deck1.printdc()
+print("\n===SD===\n")
+Deck1.shuffledeck()
+Deck1.printdc()
+Input = "0"
+while Input != "3":
+    if Input == "0":
+        print('\nMain Menu:\n' + 'Press number and hit enter to select option\n' +
+              '0 - enter anytime to return to Main Menu\n' + '1 - GAME MODE!\n' + '2 - shuffle then show deck\n'
+              + '3 - enter anytime to quit')
+        Input = input()
+    if Input == "1":
+        print('\nGAME MODE:\n' + 'Press number and hit enter to select option\n' + '1 - Choose a card!\n' +
+              '2 - Where is...\n' + '3 - What is...')
+        Input = input()
+        if Input == "1":
+            # TODO: make each guess remove the pulled card, read something about a shadow list ?a[:a]? on py docs
+            # should also tell the user the chance they have of winning
+            # on win, restore deck and shuffle, tell user the likelihood of them getting it on nth try
+
+            while Input != "0" or "3":
+                Deck1.shuffledeck()
+                print("\nGAME MODE: Choose a card!")
+                print('In this game mode you have to, Choose a card!\n' +
+                      'just enter the rank of your card (2-10,J-A) and your suit (S,H,D,C)\n' + 'EX: 10H, AD, 5S')
+                Input = input("Card:").replace(' ', '')
+                if Deck1.isindeck(Input):
+                    gamecard = Input[:-1] + Deck1.SuitsList[Deck1.GameSuit.index(Input[-1:])]
+                    if gamecard != Deck1.Deck[0]:
+                        print("YOU LOSE :(\nYou chose " + gamecard[:-1] +
+                              " of " + gamecard[-1] + " and the top card was " + Deck1.Deck[0][:-1] + " of " +
+                              Deck1.Deck[0][-1])
+                        time.sleep(2)
+                    else:
+                        print("YOU WIN! Your card was " + gamecard[:-1] + " of " + gamecard[-1])
+                elif Input == '0':
+                    break
+                elif Input == "3":
+                    exit(0)
+                else:
+                    print('\nTry again\n10H is the same as "the 10 of hearts" also CAPS MATTER')
+                    time.sleep(2)
+                    Input = "1"
+        elif Input == '2':
+            # TODO: write the "Where is" game
+            print('COMING SOON')
+            Input = '1'
+        elif Input == '3':
+            # TODO: write the "what is" game
+            print('COMING SOON')
+            Input = '1'
+    elif Input == "2":
+        print("\nBefore shuffle\n")
+        Deck1.printdc()
+        time.sleep(2)
+        print("\nAfter shuffle\n")
+        Deck1.shuffledeck()
+        Deck1.printdc()
+        print("")
+        time.sleep(2)
+        Input = "0"
+    elif Input == "3":
+        print("Bing Bong")
+        exit(0)
+    else:
+        print("hey")
+        time.sleep(1)
+        print("ya dumb")
+        time.sleep(1)
+        print("try again\n")
+        time.sleep(1)
+        Input = "0"
+exit(0)
