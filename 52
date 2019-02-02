@@ -61,13 +61,13 @@ import time
 
 Deck1 = Card()
 Deck1.makedeck()
-Deck1.printdc("card", 14)
-Deck1.printdc("card", 27)
-print("\n^^^Card^^^\nvvvDeckvvv\n")
-Deck1.printdc()
-print("\n===SD===\n")
-Deck1.shuffledeck()
-Deck1.printdc()
+#Deck1.printdc("card", 14)
+#Deck1.printdc("card", 27)
+#print("\n^^^Card^^^\nvvvDeckvvv\n")
+#Deck1.printdc()
+#print("\n===SD===\n")
+#Deck1.shuffledeck()
+#Deck1.printdc()
 Input = "0"
 while Input != "3":
     if Input == "0":
@@ -80,7 +80,7 @@ while Input != "3":
               '2 - Where is...\n' + '3 - What is...')
         Input = input()
         if Input == "1":
-            # TODO: make each guess remove the pulled card, read something about a shadow list ?a[:a]? on py docs
+            # TODO: make each guess remove the pulled card
             # should also tell the user the chance they have of winning
             # on win, restore deck and shuffle, tell user the likelihood of them getting it on nth try
 
